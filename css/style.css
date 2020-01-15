@@ -1,0 +1,115 @@
+.login-section {
+  width: 500px;
+  height: 500px;
+  /* margin: 10px auto; */
+  padding: 20px;
+  text-align: center;
+}
+
+.all {
+  background-color: #f8f8f8;
+  padding-top: 30px;
+}
+
+.user-big {
+  width: 80px;
+  height: auto;
+  position: absolute;
+  left: 215px;
+  margin-top: 40px;
+}
+
+h2 {
+  font-family: "lato";
+  margin-top: 100px;
+}
+
+.user-small {
+  position: absolute;
+  top: 233px;
+  left: 60px;
+  opacity: 0.3;
+}
+
+.lock {
+  position: absolute;
+  top: 312px;
+  left: 60px;
+  opacity: 0.3;
+}
+
+.input-section {
+  margin-top: 30px;
+}
+
+input {
+  padding-left: 60px;
+  width: 400px;
+  height: 60px;
+  display: block;
+  border-style: none;
+  border-radius: 5px;
+  margin: 20px auto;
+  font-size: 1.25rem;
+  font-family: "lato-thin";
+  /* box-shadow: 5px 10px #f2f2f2 */
+}
+
+input::placeholder {
+  padding-left: 10px;
+  font-size: 1.25rem;
+  font-family: cursive;
+  color: grey;
+  opacity: 0.3;
+}
+
+input:focus {
+  padding-left: 60px;
+  outline: none;
+}
+
+button {
+  width: 400px;
+  background-color: #566080;
+  color: white;
+}
+
+.table-info {
+  width: 1000px;
+  height: auto;
+  margin: 20px auto;
+  padding-left: 15px;
+  border-style: none;
+}
+
+.table-info tbody+tbody, .table-info td, .table-info th, .table-info thead th{
+  outline: none;
+  border-style: none
+}
+
+
+
+.start-stop {
+  width: 1000px;
+  height: auto;
+  margin: 20px auto;
+}
+
+.card {
+  margin: 60px 100px;
+  /* background-color: green;   */
+}
+
+.stop-btn {
+  width: 100px;
+}
+
+.card-body {
+  width: 200px;
+  margin: 50px;
+}
+
+.test-connection {
+  width: 100px;
+  margin: 0 auto;
+}

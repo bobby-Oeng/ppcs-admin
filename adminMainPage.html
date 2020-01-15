@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title Management System</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/adminPage.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">
+      <img src="./assets/30x30.png" width="50" height="50" alt="" class="brand-logo">
+    </a>
+    <h3 class="main-menu">TPTW ENGINEERING SDN BHD </h3>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a id="logout-btn" class="nav-link">Log out</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="card-deck">
+  <div class="card text-center text-white card-t">
+    <img src="./assets/report.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">Job Order Info</h1>
+      <p class="card-text">Listing of Job Order and view info of each process.</p>
+    </div>
+    <div class="card-footer">
+      <button id="process-enter" class="btn btn-light">Check JO Details</button>
+    </div>
+  </div>
+  <div class="card text-center bg-light card-setting">
+    <img src="./assets/process.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">Maintain User / Machine</h1>
+      <p class="card-text">Enter to manage User & Machine.</p>
+    </div>
+    <div class="card-footer">
+      <button id="userMachine-enter" href="#" class="btn btn-setting">Enter Setting</button>
+    </div>
+  </div>
+  <div class="card text-center text-white card-dashboard">
+    <img src="./assets/dashboard.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">Dashboard</h1>
+      <p class="card-text">Check your Completed Process, In Process Title & Title going to due in 10 days.</p>
+    </div>
+    <div class="card-footer">
+      <!-- <button  id="completed-btn" type="button" class="btn btn-secondary btn-success" data-toggle="tooltip" data-placement="bottom" title>
+        Completed<span id="completed-span" class="badge badge-light"></span></button> -->
+
+      <button id="nearDue-btn" type="button" class="btn btn-secondary btn-warning almost-due-btn" data-toggle="tooltip" data-placement="bottom" title>
+        Near due<span id="almost-due-span" class="badge badge-light"></span></button>
+
+      <button id="overDue-btn" type="button" class="btn btn-secondary btn-danger" data-toggle="tooltip" data-placement="bottom" title>
+        OverDue<span id="overDue-span" class="badge badge-light"></span></button>
+    </div>
+  </div>
+</div>
+
+
+
+  <footer>@2019 TPTW Engineering Sdn Bhd. All rights reserved. Powered by Evoleurt Tech</footer>
+
+  <script>
+    let $ = require("jquery")
+  </script>
+  <script>
+    require('./node_modules/bootstrap/dist/js/bootstrap.bundle.js')
+  </script>
+  <script src="./js/adminPage.js"></script>
+</body>
+
+</html>

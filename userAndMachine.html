@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>User & Machine Setup Page</title>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/userMachine.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a class="navbar-brand" href="#">
+      <img id="logo" src="./assets/30x30.png" width="50" height="50" alt="" class="brand-logo">
+    </a>
+    <h3 class="main-menu">Main menu</h3>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a id="logout-btn" class="nav-link">Log out</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="card-deck">
+  <div class="card text-center bg-light card-t">
+    <img src="./assets/user2.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">User</h1>
+      <p class="card-text">Add new user or viewd existing user list.</p>
+    </div>
+    <div class="card-footer">
+      <button id="user-enter" class="btn btn-light">User Setting</button>
+    </div>
+  </div>
+  <div class="card text-center text-white card-setting card-m">
+    <img src="./assets/robot-arm.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h1 class="card-title">Machine</h1>
+      <p class="card-text">Add new machine or view existing machine list</p>
+    </div>
+    <div class="card-footer">
+      <button id="machine-enter" href="#" class="btn btn-setting">Machine Setting</button>
+    </div>
+  </div>
+</div>
+
+
+  <footer>@2019 TPTW Engineering Sdn Bhd. All rights reserved. Powered by Evoleurt Tech</footer>
+
+  <script>
+    let $ = require("jquery")
+  </script>
+  <script>
+    require('./node_modules/bootstrap/dist/js/bootstrap.bundle.js')
+  </script>
+  <script src="./js/userMachine.js"></script>
+</body>
+
+</html>

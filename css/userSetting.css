@@ -1,0 +1,104 @@
+nav {
+  width: auto;
+  height: 70px;
+  background-color: #63707e;
+  padding: 25px;
+}
+
+.nav-link {
+  background-color: #CFD8DC;
+}
+
+.form-inline {
+  width: 300px;
+}
+
+.btn-outline-danger {
+  margin: 10px 3px;
+}
+
+.title {
+  width: 1050px;
+  color: #f2f6f5;
+  opacity: 0.5;
+}
+
+.dataTables_wrapper {
+  /* margin-top: 20px */
+  padding: 20px;
+  width: auto;
+}
+
+.dataTables_filter, .example_length {
+  margin-bottom: 50px;
+}
+
+.status-row, .action-row {
+  width: 100px;
+}
+/* .fUser-row, .sUser-row {
+  width: 10px;
+}
+
+.sDate-row, .fDate-row, .machine-row {
+  width: 90px;
+}
+
+.name-row {
+  width: 60px;
+}
+
+.sTime-row, .fTime-row, .status-row, .qty-row {
+  width: 50px;
+} */
+
+.dataTables_info {
+  width: 500px;
+}
+
+.dataTables_paginate {
+  width: 750px;
+}
+
+.dataTables_paginate a {
+  margin: 0 20px;
+}
+
+.btn-outline-danger {
+  color: yellow;
+  border-color: yellow;
+}
+
+
+.load-section {
+  width: 1245px;
+  margin: 0 auto;
+}
+
+table {
+  width: 300px;
+  /* width: 300px; */
+  /* margin-top: 20px; */
+  /* width: auto; */
+}
+
+.dataTables_filter {
+  margin-bottom: 0;
+}
+
+tfoot input {
+  width: 100%;
+  padding: 3px;
+  box-sizing: border-box;
+    }
+
+tfoot input {
+      width: 100%;
+      padding: 3px;
+      box-sizing: border-box;
+  }
+
+th {
+  color: black;
+  /* opacity: 0.5; */
+}

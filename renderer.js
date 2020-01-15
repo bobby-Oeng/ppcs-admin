@@ -1,0 +1,150 @@
+require('dotenv').config();
+const remote = require('electron').remote;
+const main = remote.require('./main.js')
+const ipc = require('electron').ipcRenderer;
+var bcrypt = require('bcryptjs');
+const cWindow = remote.getCurrentWindow();
+//Connection to Mongodb
+const mongoose = require("mongoose");
+// const mongoURI = "mongodb://root:adminpwd@localhost:27017/tptwDB?authSource=admin";
+const mongoURI = "mongodb://localhost:27017/tptwDB";
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+};
+
+
+//Connect to mongoose
+// mongoose.connect('mongodb://localhost:27017/tptwDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
+mongoose.connect(mongoURI, options);
+
+// CONNECTION EVENTS
+// When successfully connected
+// useUnifiedTopology: true
+mongoose.connection.on('connected', function() {
+  new Notification('MongoDB connected');
+});
+
+
+// If the connection throws an error
+mongoose.connection.on('error', function(err) {
+  new Notification('Mongoose default connection error: ' + err);
+});
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', function() {
+  new Notification('Mongoose default connection disconnected');
+});
+
+// If the Node process ends, close the Mongoose connection
+process.on('SIGINT', function() {
+  mongoose.connection.close(function() {
+    new Notification('Mongoose default connection disconnected through app termination');
+    process.exit(0);
+  });
+});
+
+
+
+//1.Create Schema
+//USER LOGIN
+const userSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    require: [true, "User ID cannot be blank"]
+  },
+  password: {
+    type: String,
+    require: [true, "User password cannot be blank"]
+  }
+});
+
+const User = mongoose.model("User", userSchema);
+
+User.find({}, function(err, foundList) {
+  if(err) {
+    console.log(err);
+  } else {
+    if(foundList.length === 0) {
+      bcrypt.hash(process.env.ADMIN_PASSWORD, 8, function(err, hash) {
+        const user = new User ({
+          _id: "admin",
+          password: hash
+        });
+        user.save(function(err) {
+          if(err) {
+            console.log(err);
+          } else {
+            console.log("User has been successfully created");
+          }
+        })
+      })
+    }
+  }
+})
+
+$("#login-btn").on("click", function() {
+
+  var pass = $("#uiPass").val();
+  User.findOne({_id: $("#uiName").val()}, function(err, foundUser) {
+    if (err) {
+      new Notification(err);
+    } else {
+      if (foundUser) {
+        // ipc.send("channel1", foundUser.role);
+        // cWindow.close();
+        bcrypt.compare(pass, foundUser.password, function(err, res) {
+          if (res === true) {
+            main.createAdminWindow();
+            cWindow.close();
+          } else {
+            new Notification("Password is wrong!");
+            cWindow.reload();
+          }
+        });
+      } else {
+        new Notification("Username is incorrect");
+        cWindow.reload();
+      }
+    }
+  })
+  mongoose.connection.close()
+});
+
+
+
+//LOGIN PAGE LOGIN WITH ENTER KEY PRESSED
+document.addEventListener("keypress", function(event) {
+  if(event.key === "Enter") {
+    var pass = $("#uiPass").val();
+
+    //Connect to mongoose
+    mongoose.connect(mongoURI, options);
+
+    User.findOne({_id: $("#uiName").val()}, function(err, foundUser) {
+      if (err) {
+        new Notification(err);
+      } else {
+        if (foundUser) {
+          bcrypt.compare(pass, foundUser.password, function(err, res) {
+            if (res === true) {
+              main.createAdminWindow();
+              cWindow.close();
+            } else {
+              new Notification("Password is wrong!");
+              cWindow.reload();
+            }
+          });
+        } else {
+          new Notification("Username is incorrect");
+          cWindow.reload();
+        }
+      }
+    })
+    mongoose.connection.close();
+  }
+  // mongoose.connection.close();
+})
