@@ -4,6 +4,9 @@ const main = remote.require('./main.js')
 const ipc = require('electron').ipcRenderer;
 var bcrypt = require('bcryptjs');
 const cWindow = remote.getCurrentWindow();
+const dap = "evol1234";
+
+const dialog  = remote.require('electron').dialog;
 //Connection to Mongodb
 const mongoose = require("mongoose");
 // const mongoURI = "mongodb://root:adminpwd@localhost:27017/tptwDB?authSource=admin";
@@ -12,6 +15,8 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
+
+
 
 
 //Connect to mongoose
@@ -69,7 +74,8 @@ User.find({}, function(err, foundList) {
     console.log(err);
   } else {
     if(foundList.length === 0) {
-      bcrypt.hash(process.env.ADMIN_PASSWORD, 8, function(err, hash) {
+      bcrypt.hash(dap, 8, function(err, hash) {
+      // bcrypt.hash(process.env.ADMIN_PASSWORD, 8, function(err, hash) {
         const user = new User ({
           _id: "admin",
           password: hash

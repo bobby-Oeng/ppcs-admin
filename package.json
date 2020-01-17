@@ -1,12 +1,31 @@
 {
-  "name": "electron-quick-start",
+  "name": "PPCS",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A software build for TPTW Engineering Sdn Bhd",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "win": "electron-builder -w",
+    "release": "electron-builder -w -p 'onTagOrDraft'",
+    "build": "electron-builder -w"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "build": {
+    "appId": "com.evoleurt.ppcs",
+    "copyright": "Copyright 2020 Evoleurt Tech",
+    "publish": {
+      "provider": "github"
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "win": {
+      "certificateFile": "private/evoleurttech.pfx",
+      "certificatePassword": "",
+      "publisherName": "evoleurt",
+      "icon": "build/evol-black.ico"
+    }
+  },
+  "repository": "https://github.com/bobby-Oeng/testing-AU.git",
   "keywords": [
     "Electron",
     "quick",
@@ -14,7 +33,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Evoleurt",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^7.1.7"
@@ -24,7 +43,9 @@
     "bootstrap": "^4.4.1",
     "datatables.net": "^1.10.20",
     "dotenv": "^8.2.0",
+    "electron-log": "^4.0.3",
     "electron-reload": "^1.5.0",
+    "electron-updater": "^4.2.0",
     "jquery": "^3.4.1",
     "mongoose": "^5.8.3",
     "node-firebird": "^0.8.9",

@@ -1,13 +1,20 @@
 .login-section {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 350px;
   /* margin: 10px auto; */
   padding: 20px;
   text-align: center;
+  background-color: white;
+  margin: 20px auto;
+  opacity: 0.5;
+  border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  /* margin-left:300px; */
 }
 
 .all {
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
   padding-top: 30px;
 }
 
@@ -15,26 +22,26 @@
   width: 80px;
   height: auto;
   position: absolute;
-  left: 215px;
+  left: 465px;
   margin-top: 40px;
 }
 
 h2 {
-  font-family: "lato";
+  font-family: cursive;
   margin-top: 100px;
 }
 
 .user-small {
   position: absolute;
-  top: 233px;
-  left: 60px;
+  top: 251px;
+  left: 318px;
   opacity: 0.3;
 }
 
 .lock {
   position: absolute;
-  top: 312px;
-  left: 60px;
+  top: 332px;
+  left: 318px;
   opacity: 0.3;
 }
 
@@ -43,8 +50,8 @@ h2 {
 }
 
 input {
-  padding-left: 60px;
-  width: 400px;
+  padding: 30px;
+  width: 380px;
   height: 60px;
   display: block;
   border-style: none;
@@ -56,7 +63,7 @@ input {
 }
 
 input::placeholder {
-  padding-left: 10px;
+  padding-left:5px;
   font-size: 1.25rem;
   font-family: cursive;
   color: grey;
@@ -64,17 +71,20 @@ input::placeholder {
 }
 
 input:focus {
-  padding-left: 60px;
+  /* padding-left: 40px; */
   outline: none;
 }
 
 button {
   width: 400px;
+
+  position: absolute;
+  right: 300px;
   background-color: #566080;
   color: white;
 }
 
-.table-info {
+/* .table-info {
   width: 1000px;
   height: auto;
   margin: 20px auto;
@@ -98,7 +108,7 @@ button {
 .card {
   margin: 60px 100px;
   /* background-color: green;   */
-}
+/* }
 
 .stop-btn {
   width: 100px;
@@ -112,4 +122,4 @@ button {
 .test-connection {
   width: 100px;
   margin: 0 auto;
-}
+} */
