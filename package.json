@@ -1,6 +1,6 @@
 {
   "name": "PPCS",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "A software build for TPTW Engineering Sdn Bhd",
   "main": "main.js",
   "scripts": {
@@ -19,6 +19,7 @@
       "category": "public.app-category.productivity"
     },
     "win": {
+      "target": ["nsis","zip"],
       "certificateFile": "private/evoleurttech.pfx",
       "certificatePassword": "",
       "publisherName": "evoleurt",

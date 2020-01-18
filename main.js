@@ -5,14 +5,18 @@ const {app, electron, BrowserWindow, ipcMain, Menu, MenuItem, shell, dialog, web
 const path = require('path')
 const url = require('url')
 const mongoose = require("mongoose");
-const updater = require("electron-updater");
-const autoUpdater = updater.autoUpdater;
-// const updater = require("./js/updater");
-
+const {autoUpdater} = require("electron-updater");
+const log = require('electron-log');
 require('electron-reload')(__dirname);
 
 const fs = require('fs');
 const os = require('os');
+// const autoUpdater = updater.autoUpdater;
+// const updater = require("./js/updater");
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
 
 let mainMenu = Menu.buildFromTemplate([
   {
@@ -104,48 +108,9 @@ let overDueWindow
 
 function createWindow () {
 
-
-  function update() {
-      autoUpdater.autoDownload = false
-
-      autoUpdater.on('update-available', () => {
-        dialog.showMessageBox(
-           {
-             message: "Update is available",
-             buttons: ["Default Button", "Cancel Button"],
-             defaultId: 0, // bound to buttons array
-             cancelId: 1 // bound to buttons array
-           })
-           .then(result => {
-             if (result.response === 0) {
-               // bound to buttons array
-               autoUpdater.downloadUpdate();
-             }
-           }
-         );
-      });
-      autoUpdater.on('update-downloaded', () => {
-        dialog.showMessageBox(
-           {
-             message: "Do you want to download now?",
-             buttons: ["Yes", "Later"],
-             defaultId: 0, // bound to buttons array
-             cancelId: 1 // bound to buttons array
-           })
-          .then(result => {
-            if (result.response === 0) {
-              // bound to buttons array
-              autoUpdater.quitAndInstall(false, true);
-            }
-          }
-        );
-      });
-}
-  // setTimeout( updater, 3000);
-
-setTimeout(function() {
-  update();
-}, 3000);
+  // setTimeout(function() {
+  //   autoUpdater.checkForUpdatesAndNotify();
+  // })
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -158,7 +123,7 @@ setTimeout(function() {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index1.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -623,7 +588,13 @@ exports.createSwitchProcessWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+// app.on('ready', createWindow)
+
+
+app.on('ready', function()  {
+  createWindow();
+  autoUpdater.checkForUpdates();
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
@@ -649,6 +620,41 @@ ipcMain.on("sendIDtoMain", (e, args) => {
 ipcMain.on("request-for-id", (e, args) => {
   e.sender.send("response-from-main", id);
 })
+
+////testing
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
+
+
+
+//////////////////auto updater sectino
+// autoUpdater.on('checking-for-update', () => {
+//
+// })
+// autoUpdater.on('update-available', (info) => {
+//
+// })
+// autoUpdater.on('update-not-available', (info) => {
+//
+// })
+// autoUpdater.on('error', (err) => {
+//
+// })
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

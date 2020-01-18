@@ -5,7 +5,6 @@ const ipc = require('electron').ipcRenderer;
 var bcrypt = require('bcryptjs');
 const cWindow = remote.getCurrentWindow();
 const dap = "evol1234";
-
 const dialog  = remote.require('electron').dialog;
 //Connection to Mongodb
 const mongoose = require("mongoose");
@@ -154,3 +153,6 @@ document.addEventListener("keypress", function(event) {
   }
   // mongoose.connection.close();
 })
+
+
+  
