@@ -1,5 +1,5 @@
 {
-  "name": "TPTW-PPCS",
+  "name": "evol-ppcs",
   "version": "1.0.0",
   "description": "A software build for TPTW Engineering Sdn Bhd",
   "main": "main.js",
@@ -19,13 +19,19 @@
       "category": "public.app-category.productivity"
     },
     "win": {
-      "certificateFile": "private/evoleurttech.pfx",
+      "certificateFile": "private/evoleurt.pfx",
       "certificatePassword": "",
+      "verifyUpdateCodeSignature": false,
       "publisherName": "evoleurt",
       "icon": "build/evol-black.ico"
-    }
+    },
+    "nsis": {
+        "oneClick": false,
+        "allowElevation": true,
+        "allowToChangeInstallationDirectory": true,
+      }
   },
-  "repository": "https://github.com/bobby-Oeng/evolwitp.git",
+  "repository": "",
   "keywords": [
     "Electron",
     "quick",
