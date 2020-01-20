@@ -6,23 +6,46 @@ var bcrypt = require('bcryptjs');
 const cWindow = remote.getCurrentWindow();
 const dap = "evol1234";
 const dialog  = remote.require('electron').dialog;
+const version = document.getElementById('version');
+const notification = document.getElementById('notification');
+const message = document.getElementById('message');
+const restartButton = document.getElementById('restart-button');
+var vex = require('vex-js');
+vex.registerPlugin(require('vex-dialog'));
+// // vex.defaultOptions.className = 'vex-theme-os'
+vex.defaultOptions.className = 'vex-theme-default';
 //Connection to Mongodb
 const mongoose = require("mongoose");
-// const mongoURI = "mongodb://root:adminpwd@localhost:27017/tptwDB?authSource=admin";
-const mongoURI = "mongodb://localhost:27017/tptwDB";
+const mongoURI = "mongodb://root:adminpwd@localhost:27017/tptwDB?authSource=admin";
+// const mongoURI = "mongodb://localhost:27017/tptwDB";
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
 
 
+// const version = document.getElementById('version');
 
+ipc.send('app_version');
+ipc.on('app_version', (event, arg) => {
+  ipc.removeAllListeners('app_version');
+  version.innerText = 'Version ' + arg.version;
+});
 
-//Connect to mongoose
-// mongoose.connect('mongodb://localhost:27017/tptwDB', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
+// //autoUpdater trigger ipc send to main
+// ipc.on('update_available', () => {
+//   ipc.removeAllListeners('update_available');
+//   message.innerText = 'A new update is available. Downloading now...';
+//   notification.classList.remove('hidden');
 // });
+// ipc.on('update_downloaded', () => {
+//   ipc.removeAllListeners('update_downloaded');
+//   message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
+//   restartButton.classList.remove('hidden');
+//   notification.classList.remove('hidden');
+// });
+//auto updater event END
+
 mongoose.connect(mongoURI, options);
 
 // CONNECTION EVENTS
@@ -153,6 +176,3 @@ document.addEventListener("keypress", function(event) {
   }
   // mongoose.connection.close();
 })
-
-
-  

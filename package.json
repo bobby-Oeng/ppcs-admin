@@ -1,6 +1,6 @@
 {
-  "name": "PPCS",
-  "version": "0.9.0",
+  "name": "TPTW-PPCS",
+  "version": "1.0.0",
   "description": "A software build for TPTW Engineering Sdn Bhd",
   "main": "main.js",
   "scripts": {
@@ -19,14 +19,18 @@
       "category": "public.app-category.productivity"
     },
     "win": {
-      "target": ["nsis","zip"],
       "certificateFile": "private/evoleurttech.pfx",
       "certificatePassword": "",
       "publisherName": "evoleurt",
       "icon": "build/evol-black.ico"
     }
   },
-  "repository": "https://github.com/bobby-Oeng/testing-AU.git",
+  "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerHeaderIcon": "./build/evol-black.ico"
+    },
+  "repository": "https://github.com/bobby-Oeng/evolwitp.git",
   "keywords": [
     "Electron",
     "quick",
@@ -37,7 +41,8 @@
   "author": "Evoleurt",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.7"
+    "electron": "^7.1.7",
+    "electron-builder": "^22.2.0"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

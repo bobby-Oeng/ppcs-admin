@@ -5,18 +5,18 @@ const {app, electron, BrowserWindow, ipcMain, Menu, MenuItem, shell, dialog, web
 const path = require('path')
 const url = require('url')
 const mongoose = require("mongoose");
+const updater = require("./js/updater");
 const {autoUpdater} = require("electron-updater");
 const log = require('electron-log');
 require('electron-reload')(__dirname);
 
 const fs = require('fs');
 const os = require('os');
-// const autoUpdater = updater.autoUpdater;
-// const updater = require("./js/updater");
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
-log.info('App starting...');
+// log.info('App starting...');
+autoUpdater.autoDownload = false
 
 let mainMenu = Menu.buildFromTemplate([
   {
@@ -108,9 +108,7 @@ let overDueWindow
 
 function createWindow () {
 
-  // setTimeout(function() {
-  //   autoUpdater.checkForUpdatesAndNotify();
-  // })
+  setTimeout( updater, 3000);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -123,7 +121,7 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index1.html')
+  mainWindow.loadFile('index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -593,7 +591,6 @@ exports.createSwitchProcessWindow = () => {
 
 app.on('ready', function()  {
   createWindow();
-  autoUpdater.checkForUpdates();
 });
 
 // Quit when all windows are closed.
@@ -624,17 +621,14 @@ ipcMain.on("request-for-id", (e, args) => {
 ////testing
 
 ipcMain.on('app_version', (event) => {
+  const answer = ["Confirm", "Cancel"];
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
-
+// ipcMain.on('restart_app', () => {
+//   autoUpdater.quitAndInstall();
+// });
 
 
 //////////////////auto updater sectino
@@ -648,11 +642,42 @@ ipcMain.on('restart_app', () => {
 //
 // })
 // autoUpdater.on('error', (err) => {
-//
+//   dialog.showMessageBox({
+//     title: "ERROR",
+//     message: "Something went wrong",
+//     detail: err
+//   })
 // })
-
+  // if(answer[response] === "Confirm") {
 autoUpdater.on('update-available', () => {
-  mainWindow.webContents.send('update_available');
+  const answer = ['Confirm', 'Cancel'];
+  // mainWindow.webContents.send('update_available');
+  dialog.showMessageBox({
+    title: "info",
+    message: "New version is available. Do you want to download it now?",
+    detail: "Click confirm to download now or cancel to download later",
+    buttons: answer
+  })
+  .then(result => {
+    if(result.response === 0) {
+      autoUpdater.downloadUpdate();
+    }
+  })
+});
+autoUpdater.on('update-downloaded', () => {
+  // mainWindow.webContents.send('update_downloaded');
+  const answer = ['Confirm', 'Cancel'];
+  dialog.showMessageBox({
+    title: "info",
+    message: "New version is downloaded. Do you want to install it now?",
+    detail: "Click confirm to install now or cancel to install later",
+    buttons: answer
+  })
+  .then(result => {
+    if(result.response === 0) {
+      autoUpdater.quitAndInstall(false, true);
+    }
+  })
 });
 
 
