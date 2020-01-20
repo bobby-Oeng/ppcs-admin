@@ -25,11 +25,6 @@
       "icon": "build/evol-black.ico"
     }
   },
-  "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerHeaderIcon": "./build/evol-black.ico"
-    },
   "repository": "https://github.com/bobby-Oeng/evolwitp.git",
   "keywords": [
     "Electron",
@@ -41,7 +36,7 @@
   "author": "Evoleurt",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.7",
+    "electron": "^7.1.9",
     "electron-builder": "^22.2.0"
   },
   "dependencies": {
